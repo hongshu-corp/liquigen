@@ -1,0 +1,6 @@
+= liquigen
+
+Describe your project here
+
+:include:liquigen.rdoc
+
