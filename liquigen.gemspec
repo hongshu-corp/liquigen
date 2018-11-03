@@ -5,14 +5,14 @@ spec = Gem::Specification.new do |s|
   s.version = Liquigen::VERSION
   s.author = 'Jeremy Cui'
   s.email = 'tsuijy@gmail.com'
-  s.homepage = 'http://github.com/jerecui'
+  s.homepage = 'http://github.com/jerecui/liquigen'
   s.platform = Gem::Platform::RUBY
   s.summary = 'Simple tool for generating the liquibase script.'
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
-  s.extra_rdoc_files = ['README.rdoc', 'liquigen.rdoc']
-  s.rdoc_options << '--title' << 'liquigen' << '--main' << 'README.rdoc' << '-ri'
+  # s.extra_rdoc_files = ['README.rdoc', 'liquigen.rdoc']
+  # s.rdoc_options << '--title' << 'liquigen' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'liquigen'
 
