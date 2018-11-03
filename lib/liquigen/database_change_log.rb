@@ -12,7 +12,7 @@ module Liquigen
       create_table_change = CreateTable.new(name)
 
       change_set = ChangeSet.new
-      change_set.changes << change
+      change_set.changes << create_table_change
       change_sets << change_set
 
       create_table_change

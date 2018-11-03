@@ -10,6 +10,5 @@ module Liquigen
       self.table_name = table_name
       self.columns = []
     end
-
   end
 end

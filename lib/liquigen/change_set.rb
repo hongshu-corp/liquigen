@@ -5,7 +5,7 @@ module Liquigen
     attr_accessor :changes
 
     def initialize
-      self.id = Time.new.strftime('%Y%m%d%H%M')
+      self.id = Time.new.strftime('%Y%m%d%H%M%S')
       # todo Get the current git config name
       self.name = 'Jeremy'
       self.changes = []

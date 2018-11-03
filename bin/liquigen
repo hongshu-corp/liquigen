@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 require 'gli'
-begin # XXX: Remove this begin/rescue before distributing your app
 require 'liquigen'
-rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/liquigen` to run your app"
-  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
-  STDERR.puts "Feel free to remove this message from bin/liquigen now"
-  exit 64
-end
+
+# begin # XXX: Remove this begin/rescue before distributing your app
+# rescue LoadError
+#   STDERR.puts "In development, you need to use `bundle exec bin/liquigen` to run your app"
+#   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+#   STDERR.puts "Feel free to remove this message from bin/liquigen now"
+#   exit 64
+# end
 
 class App
   extend GLI::App
@@ -22,14 +23,14 @@ class App
   desc 'add table script'
   arg_name 'Describe arguments to add_table here'
   command :add_table do |c|
-    c.action do |global_options, options, args|
+    c.desc 'table name'
+    c.default_value 'table'
+    c.flag :t
 
-      # Your command logic here
-
-      # If you have any errors, just raise them
-      # raise "that command made no sense"
-
-      puts "add_table command ran"
+    c.action do |_, options, props|
+      table = options[:t].underscore.singularize
+      handler = Liquigen::Handlers::CreateTable.new table, props
+      handler.process
     end
   end
 
@@ -64,11 +65,20 @@ class App
     # block on that command only
   end
 
-  on_error do |exception|
-    # Error logic here
-    # return false to skip default error handling
-    true
+  on_error do |err|
+    if debugging?
+      STDERR.puts err.message
+      STDERR.puts err.backtrace.join( "\n" )
+    else
+      next if GLI::CustomExit === err
+
+      STDERR.puts err.message
+    end
   end
+end
+
+def debugging?
+  defined? Bundler
 end
 
 exit App.run(ARGV)
