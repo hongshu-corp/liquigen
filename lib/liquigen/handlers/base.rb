@@ -4,6 +4,8 @@ require 'liquigen/change'
 require 'liquigen/column'
 require 'liquigen/constraint'
 
+require 'fileutils'
+
 module Liquigen::Handlers
   class Base
     attr_accessor :table
@@ -32,7 +34,12 @@ module Liquigen::Handlers
     end
 
     def build_file_name
-      "#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{table.capitalize}.yaml"
+      dir = 'src/main/resources/db/migrations'
+
+      dirname = File.dirname(dir)
+      FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
+
+      "#{dir}/#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{table.capitalize}.yaml"
     end
 
     def process_lines(file_path)
