@@ -10,15 +10,16 @@ module Liquigen::Handlers
       set = Liquigen::ChangeSet.new
       change = Liquigen::CreateTable.new(table)
       set.changes << change
-      props.each { |k, t| change.columns << build_column(k, t) }
+      props.each { |kv| change.columns << build_column(kv) }
       sets << set
     end
 
-    def build_column(name, type)
-      column = Liquigen::Column.new(name: name, type: type)
+    def build_column(name_and_type)
+      kv = name_and_type.split(':')
+      column = Liquigen::Column.new(name: kv[0], type: kv[1])
 
       constraint = Liquigen::Constraint.new
-      if name == 'id'
+      if column.name == 'id'
         column.auto_increment = true
         constraint.primary_key = true
       else

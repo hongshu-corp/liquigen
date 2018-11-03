@@ -1,3 +1,5 @@
+require 'liquigen/type_map'
+
 module Liquigen
   class Column
     attr_accessor :name
@@ -8,7 +10,8 @@ module Liquigen
 
     def initialize(attributes = {})
       self.name = attributes[:name]
-      self.type = attributes[:type]
+      self.type = TypeMap.new(attributes[:type]).db_type
+
       self.constraints = []
     end
   end
