@@ -7,7 +7,7 @@ module Liquigen
     attr_accessor :columns
 
     def initialize(table_name)
-      self.table_name = table_name
+      self.table_name = table_name.pluralize
       self.columns = []
     end
   end
