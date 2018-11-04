@@ -7,19 +7,13 @@ It is a simple tool for java liquibase script generation.
 Only support mysql db and create_table currently. And it is not a perfect tool, only help to create basic content with simple name. Please change the generated content manually.
 
 ## how to use
-1. Add **.ruby-version** to your java project directory. Fill the ruby version as the content, say, 2.5.1.
+1. gem install liquigen
 
-2. Add **.Gemfile** to the same directory.
+2. Use the liquigen script. For help, type
 
-``` ruby
-source 'https://rubygems.org'
-
-gem 'liquigen'
-
+```bash
+liquigen help
 ```
-3. bundle install
-
-4. Use the script to create database script.
 
 ## create_table
 

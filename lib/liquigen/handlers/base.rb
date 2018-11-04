@@ -36,8 +36,7 @@ module Liquigen::Handlers
     def build_file_name
       dir = 'src/main/resources/db/migrations'
 
-      dirname = File.dirname(dir)
-      FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
+      FileUtils.mkdir_p(dir)
 
       "#{dir}/#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{table.capitalize}.yaml"
     end
