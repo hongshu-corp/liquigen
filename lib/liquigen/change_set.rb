@@ -1,13 +1,13 @@
 module Liquigen
   class ChangeSet
     attr_accessor :id
-    attr_accessor :name
+    attr_accessor :author
     attr_accessor :changes
 
     def initialize
       self.id = Time.new.strftime('%Y%m%d%H%M%S')
       # todo Get the current git config name
-      self.name = 'Jeremy'
+      self.author = 'Jeremy'
       self.changes = []
     end
   end
