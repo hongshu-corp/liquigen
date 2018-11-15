@@ -37,20 +37,20 @@ class App
   desc 'Describe modify_table here'
   arg_name 'Describe arguments to modify_table here'
   command :modify_table do |c|
-    c.action do |global_options,options,args|
-      puts "modify_table command ran"
+    c.action do |global_options, options,args|
+      puts 'waiting for the implementation'
     end
   end
 
   desc 'Describe drop_table here'
   arg_name 'Describe arguments to drop_table here'
   command :drop_table do |c|
-    c.action do |global_options,options,args|
-      puts "drop_table command ran"
+    c.action do |global_options, options,args|
+      puts 'waiting for the implementation'
     end
   end
 
-  pre do |global,command,options,args|
+  pre do |global, command, options, args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the
     # chosen command
@@ -59,7 +59,7 @@ class App
     true
   end
 
-  post do |global,command,options,args|
+  post do |global, command, options, args|
     # Post logic here
     # Use skips_post before a command to skip this
     # block on that command only

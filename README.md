@@ -18,10 +18,10 @@ liquigen help
 ## create_table
 
 ```bash
-liquigen create_table -t table_name prop1:type prop2:type
+liquigen add_table -t table_name prop1:type prop2:type
 
 # Example
-liquigen create_table -t user id:integer name:string email:string created_time:datetime updated_time:datetime
+liquigen add_table -t user id:integer name:string email:string created_time:datetime updated_time:datetime
 ```
 The result file:
 ```yaml
@@ -48,6 +48,14 @@ databaseChangeLog:
                 nullable: false
 
 ```
+
+## modify_table
+
+ToDo.
+
+## drop table
+
+ToDo.
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/jerecui/liquigen.

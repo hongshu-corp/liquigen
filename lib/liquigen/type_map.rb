@@ -8,6 +8,7 @@ module Liquigen
       # http://blog.ifyouseewendy.com/blog/2015/08/10/data-types-in-rails/
       self.map = {
         integer: 'bigint',
+        long: 'bigint',
         string: 'varchar(255)',
         text: 'text',
         float: 'float',
