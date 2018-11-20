@@ -1,26 +1,26 @@
 require 'liquigen/handlers/base'
 
 module Liquigen::Handlers
-  class RenameTable < Base
+  class ChangeType < Base
     def initialize(props)
       self.props = props
       self.sets = []
     end
 
     def action_name
-      'RenameTable'
+      'ChangeType'
     end
 
     def file_suffix
       props.map do |item|
         item.split(':')[0].camelize
-      end.join('And')
+      end.uniq.join('And')
     end
 
     def build_one_changeset(set)
       props.each do |kv|
         kv = kv.split(':')
-        change = Liquigen::RenameTable.new(kv[0], kv[1])
+        change = Liquigen::ChangeType.new(kv[0], kv[1], kv[2])
         set.changes << change
       end
     end

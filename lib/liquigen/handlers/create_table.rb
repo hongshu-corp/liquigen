@@ -6,12 +6,10 @@ module Liquigen::Handlers
       'CreateTable'
     end
 
-    def build_change_sets
-      set = Liquigen::ChangeSet.new
+    def build_one_changeset(set)
       change = Liquigen::CreateTable.new(table)
       set.changes << change
       props.each { |kv| change.columns << build_column(kv) }
-      sets << set
     end
 
     def build_column(name_and_type)

@@ -52,6 +52,20 @@ class App
     end
   end
 
+  desc 'change type'
+  long_desc %{
+    If you want to change the table column type,
+    Use the following command:
+    liquigen change_type user:name:string
+  }
+  arg_name 'table:column_name:new_type'
+  command :change_type do |c|
+    c.action do |_, _, args|
+      handler = Liquigen::Handlers::ChangeType.new args
+      handler.process
+    end
+  end
+
   desc 'Describe drop_table here'
   arg_name 'Describe arguments to drop_table here'
   command :drop_table do |c|

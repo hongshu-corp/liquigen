@@ -19,7 +19,9 @@ module Liquigen::Handlers
     end
 
     def process
-      build_change_sets
+      set = Liquigen::ChangeSet.new
+      build_one_changeset(set)
+      sets << set
 
       file_path = build_file_name
       File.open(file_path, 'w+') { |f| f.write(sets.to_yaml(indentation: 4)) }
