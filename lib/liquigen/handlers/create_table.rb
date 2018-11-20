@@ -18,15 +18,13 @@ module Liquigen::Handlers
       kv = name_and_type.split(':')
       column = Liquigen::Column.new(name: kv[0], type: kv[1])
 
-      constraint = Liquigen::Constraint.new
       if column.name == 'id'
         column.auto_increment = true
-        constraint.primary_key = true
+        column.constraints.primary_key = true
       else
-        constraint.nullable = false
+        column.constraints.nullable = false
       end
 
-      column.constraints << constraint
       column
     end
   end

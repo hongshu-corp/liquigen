@@ -12,7 +12,7 @@ module Liquigen
       self.name = attributes[:name]
       self.type = TypeMap.new(attributes[:type]).db_type
 
-      self.constraints = []
+      self.constraints = Constraint.new
     end
   end
 end

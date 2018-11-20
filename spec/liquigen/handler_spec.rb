@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe Liquigen::Handler, type: :model do
-  let(:handler) { Liquigen::Handler.new 'User', 'id: integer' }
+RSpec.describe Liquigen::Handlers::Base, type: :model do
+  let(:handler) { described_class.new 'User', 'id: integer' }
 
   let(:source) {
     'databaseChangeLog:
@@ -16,20 +16,19 @@ RSpec.describe Liquigen::Handler, type: :model do
             name: id
             type:
             constraints:
-            - Constraint:
-                nullable: false
                 primary_key:
+                nullable: false
 
       '
     }
   describe '#remove_empty' do
     let(:lines) { source.split("\n") }
-    subject { handler.send(:remove_empty, lines) }
+    subject { handler.send(:remove_lines_with_empty_value, lines) }
 
     it 'should remove the lines which contains empty value' do
       ret = subject
 
-      expect(ret.size).to eq 15
+      expect(ret.size).to eq 14
     end
   end
 
@@ -47,7 +46,7 @@ RSpec.describe Liquigen::Handler, type: :model do
     let(:lines) { source.split("\n") }
 
     it 'should camelize the lines' do
-      ret = handler.send(:camelize_lines, lines)
+      ret = handler.send(:camelize_words, lines)
       expect(ret[ret.size - 1]).to eq '      tableName: user'
     end
   end

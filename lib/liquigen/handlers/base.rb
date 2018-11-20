@@ -53,8 +53,12 @@ module Liquigen::Handlers
       lines = []
       File.readlines(file_path).each do |line|
         if line.include?('!ruby/object:Liquigen::')
-          line = line.gsub '!ruby/object:Liquigen::', ''
-          line = line.rstrip + ":\n"
+          if line.include?('-')
+            line = line.gsub '!ruby/object:Liquigen::', ''
+          else
+            line = line.split(':')[0]
+          end
+          line = line.rstrip + ':'
         end
         lines << line.rstrip
       end
@@ -72,7 +76,14 @@ module Liquigen::Handlers
         next if line.strip.size.zero?
         next if lines[index + 1].nil?
 
-        empty_marks << index unless lines[index + 1].include?('-')
+        current_blank = line.gsub(/^(\s+).*$/, '\1')
+        next_blank = lines[index + 1].gsub(/^(\s+).*$/, '\1')
+
+        valid = false
+        valid = true if lines[index + 1].include?('-')
+        valid = true if current_blank.size < next_blank.size
+
+        empty_marks << index unless valid
       end
 
       lines.select.with_index { |_, i| !empty_marks.include?(i) }
