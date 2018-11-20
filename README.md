@@ -58,13 +58,13 @@ ToDo.
 ## How to let the liquibase use migration directory
 
 * In your java project, open application.yml, add the following lines:
-``` yaml
+```yaml
 spring:
   liquibase:
     change-log: classpath:/db/changelog-master.yaml
 ```
 * Edit your changelog-master.yaml file.
-``` yaml
+```yaml
 databaseChangeLog:
 - includeAll:
     path: "db/migrations/"
@@ -73,6 +73,35 @@ databaseChangeLog:
 That's it.
 * Liquigen will create the directory automatically.
 
+
+## How to use the latest source in your java project
+
+1. Add .ruby-version file to your project root path.
+
+```ruby
+ruby-2.5.1
+
+```
+You can also use the other version.
+
+2. Add Gemfile file as well.
+```ruby
+source 'https://rubygems.org'
+
+gem 'liquigen', :git => 'https://github.com/jerecui/liquigen'
+```
+3. Bundle install
+
+```sh
+bundle install
+
+```
+4. cd your project in command line, type liquigen xxxxx
+
+```sh
+# say
+liquigen add_table -t user id:integer name:string
+```
 
 
 ## Contributing
