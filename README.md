@@ -37,14 +37,12 @@ databaseChangeLog:
             name: id
             type: bigint
             constraints:
-            - constraint:
                 primaryKey: true
             autoIncrement: true
         - column:
             name: name
             type: varchar(255)
             constraints:
-            - constraint:
                 nullable: false
 
 ```
@@ -56,6 +54,26 @@ ToDo.
 ## drop table
 
 ToDo.
+
+## How to let the liquibase use migration directory
+
+* In your java project, open application.yml, add the following lines:
+``` yaml
+spring:
+  liquibase:
+    change-log: classpath:/db/changelog-master.yaml
+```
+* Edit your changelog-master.yaml file.
+``` yaml
+databaseChangeLog:
+- includeAll:
+    path: "db/migrations/"
+```
+
+That's it.
+* Liquigen will create the directory automatically.
+
+
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/jerecui/liquigen.
