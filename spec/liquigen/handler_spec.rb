@@ -38,7 +38,10 @@ RSpec.describe Liquigen::Handlers::Base, type: :model do
     id: 201811031330
     name: Jeremy
     changes:
-    - CreateTable
+    - RenameTable:
+      old_table_name: users
+      new_table_name: s_users
+    - CreateTable:
       table_name: user
 
 '
@@ -48,6 +51,15 @@ RSpec.describe Liquigen::Handlers::Base, type: :model do
     it 'should camelize the lines' do
       ret = handler.send(:camelize_words, lines)
       expect(ret[ret.size - 1]).to eq '      tableName: user'
+    end
+
+    describe 'Should only process the key part' do
+      let(:source) { ' new_table_name: s_users'}
+
+      it 'should only process the key part' do
+        ret = handler.send(:camelize_words, lines)
+        expect(ret[ret.size - 1]).to eq ' newTableName: s_users'
+      end
     end
   end
 end

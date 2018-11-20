@@ -22,6 +22,10 @@ class App
 
   desc 'add table script'
   arg_name 'Describe arguments to add_table here'
+  long_desc %{
+    Example
+    liquigen add_table -t user id:integer name:string
+  }
   command :add_table do |c|
     c.desc 'table name'
     c.default_value 'table'
@@ -34,11 +38,17 @@ class App
     end
   end
 
-  desc 'Describe modify_table here'
-  arg_name 'Describe arguments to modify_table here'
-  command :modify_table do |c|
-    c.action do |global_options, options,args|
-      puts 'waiting for the implementation'
+  desc 'rename tables'
+  long_desc %{
+    If you want to change the table users to s_users, customers to s_customers,
+    Use the following command:
+    liquigen rename_table user:s_users customer:s_customers
+  }
+  arg_name 'old_table_name:new_table_name'
+  command :rename_table do |c|
+    c.action do |_, _, args|
+      handler = Liquigen::Handlers::RenameTable.new args
+      handler.process
     end
   end
 
@@ -68,7 +78,7 @@ class App
   on_error do |err|
     if debugging?
       STDERR.puts err.message
-      STDERR.puts err.backtrace.join( "\n" )
+      STDERR.puts err.backtrace.join("\n")
     else
       next if GLI::CustomExit === err
 

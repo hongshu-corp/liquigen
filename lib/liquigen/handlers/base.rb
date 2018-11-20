@@ -33,12 +33,16 @@ module Liquigen::Handlers
       'liquigen'
     end
 
+    def file_suffix
+      table.capitalize
+    end
+
     def build_file_name
       dir = 'src/main/resources/db/migrations'
 
       FileUtils.mkdir_p(dir)
 
-      "#{dir}/#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{table.capitalize}.yaml"
+      "#{dir}/#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{file_suffix}.yaml"
     end
 
     def process_lines(file_path)
@@ -91,7 +95,9 @@ module Liquigen::Handlers
 
     def camelize_words(lines)
       lines.map do |line|
-        line.gsub(/[\w^:]+/) { |x| x.camelize(:lower) }
+        left = line.gsub(/^(.*?):.*$/, '\1')
+        right = line.gsub(/^.*?(:.*)$/, '\1')
+        left.gsub(/[\w^:]+/) { |x| x.camelize(:lower) } + right
       end
     end
   end
