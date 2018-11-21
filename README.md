@@ -97,6 +97,31 @@ databaseChangeLog:
 
 ```
 
+## rename_column
+```bash
+liquigen rename_column user:status:status_ok:string customer:status:status_ok:string
+```
+
+Result:
+```yaml
+databaseChangeLog:
+- changeSet:
+    id: 20181121162306_RenameColumn_UserStatusToStatusOkAndCustomerStatusToStatusOk
+    author: Jeremy Cui
+    changes:
+    - renameColumn:
+        tableName: users
+        oldColumnName: status
+        newColumnName: status_ok
+        columnDataType: varchar(255)
+    - renameColumn:
+        tableName: customers
+        oldColumnName: status
+        newColumnName: status_ok
+        columnDataType: varchar(255)
+
+```
+
 ## change_type
 ```bash
 liquigen change_type user:id:integer customer:name:string

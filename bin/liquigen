@@ -68,6 +68,20 @@ class App
     end
   end
 
+
+  desc 'rename columns script'
+  arg_name 'Describe arguments to rename_column here'
+  long_desc %{
+    Example
+    liquigen rename_column user:status:status_ok:string customer:status:status_ok:string
+  }
+  command :rename_column do |c|
+    c.action do |_, _, props|
+      handler = Liquigen::Handlers::RenameColumn.new props
+      handler.process
+    end
+  end
+
   desc 'change type'
   long_desc %{
     If you want to change the table column type,
