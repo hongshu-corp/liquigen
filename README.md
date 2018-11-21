@@ -4,7 +4,7 @@ Comparing with ruby, java sucks.
 
 It is a simple tool for java liquibase script generation.
 
-Only support mysql db and create_table currently. And it is not a perfect tool, only help to create basic content with simple name. Please change the generated content manually.
+Only support mysql db. And it is not a perfect tool, can help to create basic content with simple name. Please change the generated content manually if the generation was wrong.
 
 ## how to use
 1. gem install liquigen
@@ -68,6 +68,11 @@ databaseChangeLog:
 
 ```
 
+## drop_table
+```bash
+liquigen drop_table user customer
+```
+
 ## add_column
 ```bash
 liquigen add_column -t users name:string email:string
@@ -88,7 +93,6 @@ databaseChangeLog:
             type: varchar(255)
             constraints:
                 nullable: false
-                primaryKey:
         - column:
             name: email
             type: varchar(255)
@@ -144,10 +148,6 @@ databaseChangeLog:
         newDateType: varchar(255)
 
 ```
-
-## drop table
-
-ToDo.
 
 ## create_index
 ```bash

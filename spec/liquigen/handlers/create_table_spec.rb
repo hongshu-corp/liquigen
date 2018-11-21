@@ -18,7 +18,6 @@ RSpec.describe Liquigen::Handlers::CreateTable, type: :model do
             constraints:
                 primary_key:
                 nullable: false
-
       '
     }
   describe '#remove_empty' do
@@ -28,7 +27,7 @@ RSpec.describe Liquigen::Handlers::CreateTable, type: :model do
     it 'should remove the lines which contains empty value' do
       ret = subject
 
-      expect(ret.size).to eq 14
+      expect(ret.size).to eq 12
     end
 
     describe '#remove_empty_othercase' do

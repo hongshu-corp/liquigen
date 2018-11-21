@@ -51,6 +51,19 @@ class App
     end
   end
 
+  desc 'drop tables'
+  long_desc %{
+    example:
+    liquigen drop_table user customer
+  }
+  arg_name 'table1 table2 ...'
+  command :drop_table do |c|
+    c.action do |_, _, args|
+      handler = Liquigen::Handlers::DropTable.new args
+      handler.process
+    end
+  end
+
   desc 'add columns script'
   arg_name 'Describe arguments to add_column here'
   long_desc %{
@@ -67,7 +80,6 @@ class App
       handler.process
     end
   end
-
 
   desc 'rename columns script'
   arg_name 'Describe arguments to rename_column here'
@@ -93,14 +105,6 @@ class App
     c.action do |_, _, args|
       handler = Liquigen::Handlers::ChangeType.new args
       handler.process
-    end
-  end
-
-  desc 'Describe drop_table here'
-  arg_name 'Describe arguments to drop_table here'
-  command :drop_table do |c|
-    c.action do |global_options, options,args|
-      puts 'waiting for the implementation'
     end
   end
 
