@@ -1,7 +1,7 @@
 require 'liquigen/change'
 
 module Liquigen
-  class CreateTable < Change
+  class AddColumn < Change
     attr_accessor :table_name
 
     attr_accessor :columns

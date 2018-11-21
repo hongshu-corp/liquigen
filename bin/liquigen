@@ -32,8 +32,7 @@ class App
     c.flag :t
 
     c.action do |_, options, props|
-      table = options[:t].underscore.singularize
-      handler = Liquigen::Handlers::CreateTable.new table, props
+      handler = Liquigen::Handlers::CreateTable.new options[:t], props
       handler.process
     end
   end
@@ -48,6 +47,23 @@ class App
   command :rename_table do |c|
     c.action do |_, _, args|
       handler = Liquigen::Handlers::RenameTable.new args
+      handler.process
+    end
+  end
+
+  desc 'add columns script'
+  arg_name 'Describe arguments to add_column here'
+  long_desc %{
+    Example
+    liquigen add_column -t user id:integer name:string
+  }
+  command :add_column do |c|
+    c.desc 'table name'
+    c.default_value 'table'
+    c.flag :t
+
+    c.action do |_, options, props|
+      handler = Liquigen::Handlers::AddColumn.new options[:t], props
       handler.process
     end
   end

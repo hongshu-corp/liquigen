@@ -68,6 +68,35 @@ databaseChangeLog:
 
 ```
 
+## add_column
+```bash
+liquigen add_column -t users name:string email:string
+```
+
+Result:
+```yaml
+databaseChangeLog:
+- changeSet:
+    id: 20181121155512_AddColumn_User_NameAndEmail
+    author: Jeremy Cui
+    changes:
+    - addColumn:
+        tableName: users
+        columns:
+        - column:
+            name: name
+            type: varchar(255)
+            constraints:
+                nullable: false
+                primaryKey:
+        - column:
+            name: email
+            type: varchar(255)
+            constraints:
+                nullable: false
+
+```
+
 ## change_type
 ```bash
 liquigen change_type user:id:integer customer:name:string

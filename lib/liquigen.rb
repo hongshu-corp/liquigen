@@ -4,6 +4,7 @@ require 'active_support'
 require 'active_support/inflector'
 
 require 'liquigen/create_table'
+require 'liquigen/add_column'
 require 'liquigen/rename_table'
 require 'liquigen/modify_data_type'
 
@@ -14,6 +15,7 @@ require 'liquigen/constraint'
 
 require 'liquigen/handlers/base'
 require 'liquigen/handlers/create_table'
+require 'liquigen/handlers/add_column'
 require 'liquigen/handlers/rename_table'
 require 'liquigen/handlers/change_type'
 

@@ -44,7 +44,7 @@ module Liquigen::Handlers
     end
 
     def build_id
-      "#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{file_suffix}"
+      "#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}_#{file_suffix}"
     end
 
     def build_file_name
