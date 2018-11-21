@@ -145,11 +145,14 @@ databaseChangeLog:
 
 ```
 
-ToDo.
-
 ## drop table
 
 ToDo.
+
+## sql
+```bash
+liquigen sql "update users set column=true" "update customers set x = 1"
+```
 
 ## How to let the liquibase use migration directory
 

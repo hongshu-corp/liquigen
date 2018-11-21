@@ -104,6 +104,15 @@ class App
     end
   end
 
+  desc 'Describe sql here'
+  arg_name 'Describe arguments to raw sql here'
+  command :sql do |c|
+    c.action do |_, _, args|
+      handler = Liquigen::Handlers::Sql.new args
+      handler.process
+    end
+  end
+
   pre do |global, command, options, args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the

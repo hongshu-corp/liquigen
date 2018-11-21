@@ -8,6 +8,7 @@ require 'liquigen/add_column'
 require 'liquigen/rename_table'
 require 'liquigen/modify_data_type'
 require 'liquigen/rename_column'
+require 'liquigen/sql'
 
 require 'liquigen/change_set'
 require 'liquigen/change'
@@ -20,6 +21,7 @@ require 'liquigen/handlers/add_column'
 require 'liquigen/handlers/rename_table'
 require 'liquigen/handlers/change_type'
 require 'liquigen/handlers/rename_column'
+require 'liquigen/handlers/sql'
 
 # Add requires for other files you add to your project here, so
 # you just need to require this one file in your bin file
