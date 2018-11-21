@@ -47,7 +47,28 @@ databaseChangeLog:
 
 ```
 
-## modify_table
+## change_type
+```bash
+liquigen change_type user:id:integer customer:name:string
+```
+
+Result:
+```yaml
+databaseChangeLog:
+- changeSet:
+    id: '20181121145051'
+    author: Jeremy
+    changes:
+    - changeType:
+        tableName: users
+        columnName: id
+        newDateType: bigint
+    - changeType:
+        tableName: customers
+        columnName: name
+        newDateType: varchar(255)
+
+```
 
 ToDo.
 
