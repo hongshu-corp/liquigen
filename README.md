@@ -6,6 +6,8 @@ It is a simple tool for java liquibase script generation.
 
 Only support mysql db. And it is not a perfect tool, can help to create basic content with simple name. Please change the generated content manually if the generation was wrong.
 
+[Liquibase documentation](http://www.liquibase.org/documentation/changes/).
+
 ## how to use
 1. gem install liquigen
 

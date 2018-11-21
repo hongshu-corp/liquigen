@@ -6,14 +6,20 @@ module Liquigen
 
     def initialize(file_name)
       self.id = file_name
-      self.author = current_git_user
+      self.author = "#{git_user} <#{git_email}>"
       self.changes = []
     end
 
-    def current_git_user
+    def git_user
       author = ''
       IO.popen('git config -l | grep user.name') { |x| author = x.gets }
       author = author.gsub(/user.name=(\w*)/, '\1').strip || 'yourname'
+    end
+
+    def git_email
+      email = []
+      IO.popen('git config -l | grep user.email') { |x| email = x.gets }
+      email = email.gsub(/user.email=(\w*)/, '\1').strip
     end
   end
 end
