@@ -16,6 +16,11 @@ module Liquigen::Handlers
       kv = name_and_type.split(':')
       column = Liquigen::Column.new(name: kv[0], type: kv[1])
 
+      unless constraints?
+        column.constraints = nil
+        return column
+      end
+
       if column.name == 'id'
         column.auto_increment = true
         column.constraints.primary_key = true
@@ -24,6 +29,10 @@ module Liquigen::Handlers
       end
 
       column
+    end
+
+    def constraints?
+      true
     end
   end
 end

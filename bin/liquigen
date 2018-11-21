@@ -113,6 +113,23 @@ class App
     end
   end
 
+  desc 'add index script'
+  arg_name 'Describe arguments to add_index here'
+  long_desc %{
+    Example
+    liquigen add_index -t user id:integer name:string
+  }
+  command :add_index do |c|
+    c.desc 'table name'
+    c.default_value 'table'
+    c.flag :t
+
+    c.action do |_, options, props|
+      handler = Liquigen::Handlers::AddIndex.new options[:t], props
+      handler.process
+    end
+  end
+
   pre do |global, command, options, args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the

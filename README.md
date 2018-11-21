@@ -149,6 +149,11 @@ databaseChangeLog:
 
 ToDo.
 
+## create_index
+```bash
+liquigen add_index -t user name:string email:string
+```
+
 ## sql
 ```bash
 liquigen sql "update users set column=true" "update customers set x = 1"

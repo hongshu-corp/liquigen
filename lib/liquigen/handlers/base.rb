@@ -94,7 +94,7 @@ module Liquigen::Handlers
         next_blank = lines[index + 1].gsub(/^(\s+).*$/, '\1')
 
         valid = false
-        valid = true if lines[index + 1].include?('-')
+        valid = true if lines[index + 1].include?('-') && current_blank.size == next_blank.size
         valid = true if current_blank.size < next_blank.size
 
         empty_marks << index unless valid

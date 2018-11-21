@@ -30,6 +30,27 @@ RSpec.describe Liquigen::Handlers::CreateTable, type: :model do
 
       expect(ret.size).to eq 14
     end
+
+    describe '#remove_empty_othercase' do
+      let(:source) {
+        'databaseChangeLog:
+- changeSet:
+    author: Jeremy Cui
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: name
+            type: varchar(255)
+            constraints:
+        - column:
+            type: varchar(255)
+            constraints:
+        '
+      }
+
+      specify { expect(subject.join.include?('constraints')).to be_falsy }
+    end
   end
 
   describe '#camelize' do
