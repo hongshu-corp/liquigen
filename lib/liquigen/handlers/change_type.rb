@@ -5,6 +5,7 @@ module Liquigen::Handlers
     def initialize(props)
       self.props = props
       self.sets = []
+      self.id = build_id
     end
 
     def action_name

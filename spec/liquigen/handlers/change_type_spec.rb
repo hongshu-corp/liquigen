@@ -10,6 +10,9 @@ RSpec.describe Liquigen::Handlers::ChangeType, type: :model do
 
   describe '#file_suffix' do
     specify { expect(handler.file_suffix).to eq 'UserAndCustomer' }
+  end
 
+  describe '#id' do
+    specify { expect(handler.id).not_to eq '' }
   end
 end

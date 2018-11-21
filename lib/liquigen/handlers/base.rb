@@ -12,14 +12,18 @@ module Liquigen::Handlers
     attr_accessor :props
     attr_accessor :sets
 
+    attr_accessor :id
+
     def initialize(table, props)
       self.table = table
       self.props = props
       self.sets = []
+
+      self.id = build_id
     end
 
     def process
-      set = Liquigen::ChangeSet.new
+      set = Liquigen::ChangeSet.new(id)
       build_one_changeset(set)
       sets << set
 
@@ -39,12 +43,16 @@ module Liquigen::Handlers
       table.capitalize
     end
 
+    def build_id
+      "#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{file_suffix}"
+    end
+
     def build_file_name
       dir = 'src/main/resources/db/migrations'
 
       FileUtils.mkdir_p(dir)
 
-      "#{dir}/#{Time.new.strftime('%Y%m%d%H%M%S')}_#{action_name}#{file_suffix}.yaml"
+      "#{dir}/#{id}.yaml"
     end
 
     def process_lines(file_path)

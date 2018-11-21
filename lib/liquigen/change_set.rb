@@ -4,8 +4,8 @@ module Liquigen
     attr_accessor :author
     attr_accessor :changes
 
-    def initialize
-      self.id = Time.new.strftime('%Y%m%d%H%M%S')
+    def initialize(file_name)
+      self.id = file_name
       self.author = current_git_user
       self.changes = []
     end

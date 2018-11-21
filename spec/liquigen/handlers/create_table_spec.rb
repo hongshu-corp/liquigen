@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Liquigen::Handlers::Base, type: :model do
+RSpec.describe Liquigen::Handlers::CreateTable, type: :model do
   let(:handler) { described_class.new 'User', 'id: integer' }
 
   let(:source) {
@@ -61,5 +61,9 @@ RSpec.describe Liquigen::Handlers::Base, type: :model do
         expect(ret[ret.size - 1]).to eq ' newTableName: s_users'
       end
     end
+  end
+
+  describe '#id' do
+    specify { expect(handler.id).not_to eq '' }
   end
 end
