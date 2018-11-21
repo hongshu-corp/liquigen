@@ -47,6 +47,27 @@ databaseChangeLog:
 
 ```
 
+## rename_table
+```bash
+liquigen rename_table users:s_users customers:s_customers
+```
+
+Result file:
+```yaml
+databaseChangeLog:
+- changeSet:
+    id: 20181121150900_RenameTableUsersAndCustomer
+    author: Jeremy
+    changes:
+    - renameTable:
+        oldTableName: users
+        newTableName: s_users
+    - renameTable:
+        oldTableName: customers
+        newTableName: s_customers
+
+```
+
 ## change_type
 ```bash
 liquigen change_type user:id:integer customer:name:string
@@ -59,11 +80,11 @@ databaseChangeLog:
     id: '20181121145051'
     author: Jeremy
     changes:
-    - changeType:
+    - modifyDataType:
         tableName: users
         columnName: id
         newDateType: bigint
-    - changeType:
+    - modifyDataType:
         tableName: customers
         columnName: name
         newDateType: varchar(255)

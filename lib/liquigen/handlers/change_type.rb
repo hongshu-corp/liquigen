@@ -21,7 +21,7 @@ module Liquigen::Handlers
     def build_one_changeset(set)
       props.each do |kv|
         kv = kv.split(':')
-        change = Liquigen::ChangeType.new(kv[0], kv[1], kv[2])
+        change = Liquigen::ModifyDataType.new(kv[0], kv[1], kv[2])
         set.changes << change
       end
     end

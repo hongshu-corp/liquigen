@@ -5,7 +5,7 @@ require 'active_support/inflector'
 
 require 'liquigen/create_table'
 require 'liquigen/rename_table'
-require 'liquigen/change_type'
+require 'liquigen/modify_data_type'
 
 require 'liquigen/change_set'
 require 'liquigen/change'

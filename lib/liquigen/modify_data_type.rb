@@ -1,7 +1,7 @@
 require 'liquigen/change'
 
 module Liquigen
-  class ChangeType < Change
+  class ModifyDataType < Change
     attr_accessor :table_name
     attr_accessor :column_name
     attr_accessor :new_date_type
