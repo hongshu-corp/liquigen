@@ -28,6 +28,10 @@ require 'liquigen/handlers/add_index'
 require 'liquigen/handlers/drop_table'
 
 require 'liquigen/scaffold/config'
+require 'liquigen/scaffold/base'
+require 'liquigen/scaffold/controller'
+require 'liquigen/scaffold/entity'
+require 'liquigen/scaffold/repository'
 
 # Add requires for other files you add to your project here, so
 # you just need to require this one file in your bin file

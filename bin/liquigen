@@ -155,6 +155,32 @@ class App
     end
   end
 
+  desc 'Scaffod the java classes'
+  arg_name 'properties like id:integer, name:string'
+  command :scaffold do |c|
+    c.desc 'model name'
+    c.default_value 'model'
+    c.flag :n
+
+    c.desc 'generating the entity'
+    c.default_value true
+    c.switch :entity
+
+    c.desc 'generating the controller'
+    c.default_value false
+    c.switch :controller
+
+    c.desc 'generating the repository'
+    c.default_value false
+    c.switch :repository
+
+    c.action do |_, options, args|
+      Liquigen::Scaffold::Entity.new(options[:n], args).process if options[:entity]
+      Liquigen::Scaffold::Controller.new(options[:n], args).process if options[:controller]
+      Liquigen::Scaffold::Repository.new(options[:n], args).process if options[:repository]
+    end
+  end
+
   pre do |global, command, options, args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the

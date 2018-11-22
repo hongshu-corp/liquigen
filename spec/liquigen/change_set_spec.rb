@@ -5,6 +5,6 @@ RSpec.describe Liquigen::ChangeSet, type: :model do
 
   describe '#current git user' do
     let(:author) { 'Jeremy Cui' }
-    specify { expect(change_set.author).to eq author }
+    specify { expect(change_set.author.include?(author)).to be_truthy }
   end
 end

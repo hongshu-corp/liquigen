@@ -48,11 +48,9 @@ module Liquigen::Handlers
     end
 
     def build_file_name
-      dir = 'src/main/resources/db/migrations'
+      FileUtils.mkdir_p(Liquigen.migration_path)
 
-      FileUtils.mkdir_p(dir)
-
-      "#{dir}/#{id}.yaml"
+      "#{Liquigen.migration_path}/#{id}.yaml"
     end
 
     def process_lines(file_path)

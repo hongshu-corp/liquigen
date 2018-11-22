@@ -161,6 +161,26 @@ liquigen add_index -t user name:string email:string
 liquigen sql "update users set column=true" "update customers set x = 1"
 ```
 
+## config
+Which is used for scaffolding java codes. In your application directory, one file called '.liquigen' will be added.
+```bash
+liquigen config
+```
+
+Please specify your custom name and path:
+* package_name=com.yourpackage
+* java_codes_root=src/main/java
+* migration_path=src/main/resources/db/migrations
+* controller_package_name=
+* entity_package_name=
+* repository_package_name=
+
+## scaffold
+```bash
+liquigen scaffold -t table --controller --repository id:integer name:string email:string
+# Get help by typing liquigen scaffold --help
+```
+
 ## How to let the liquibase use migration directory
 
 * In your java project, open application.yml, add the following lines:

@@ -2,6 +2,7 @@ module Liquigen
   class TypeMap
     attr_accessor :rails_type
     attr_accessor :map
+    attr_accessor :java_map
 
     def set_map
       # Only for mysql
@@ -17,6 +18,18 @@ module Liquigen
         binary: 'blob',
         boolean: 'tinyint(1)'
       }
+
+      self.java_map = {
+        integer: 'Long',
+        long: 'Long',
+        string: 'String',
+        text: 'String',
+        float: 'Float',
+        decimal: 'BigDecimal',
+        datetime: 'Date',
+        binary: 'Object',
+        boolean: 'boolean'
+      }
     end
 
     def initialize(type)
@@ -26,6 +39,10 @@ module Liquigen
 
     def db_type
       map[rails_type.to_sym]
+    end
+
+    def java_type
+      java_map[rails_type.to_sym]
     end
   end
 end
