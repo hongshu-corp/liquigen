@@ -45,5 +45,32 @@ module Liquigen
     attr_accessor :java_codes_root
     # default value: src/main/resources/db/migrations
     attr_accessor :migration_path
+
+    def load_default
+      self.package_name ||= 'com.package'
+      self.controller_package_name ||= "#{package_name}.controller"
+      self.entity_package_name ||= "#{package_name}.model"
+      self.repository_package_name ||= "#{package_name}.repository"
+      self.java_codes_root ||= 'src/main/java'
+      self.migration_path ||= 'src/main/resources/db/migrations'
+    end
+
+    def load
+      load_lines File.readlines(Liquigen::Scaffold::CONFIG_FILE) if File.exist?(Liquigen::Scaffold::CONFIG_FILE)
+
+      load_default
+    end
+
+    def load_lines(lines)
+      lines.each do |line|
+        next if line.strip.start_with? '#'
+        next if line.strip.size.zero?
+
+        assignment = line.split('=')
+        name = "#{assignment[0]&.strip}="
+
+        Liquigen.send(name, assignment[1]&.strip) if Liquigen.singleton_methods.include?(name.to_sym)
+      end
+    end
   end
 end

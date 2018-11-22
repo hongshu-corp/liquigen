@@ -142,12 +142,27 @@ class App
     end
   end
 
+  desc 'Ping the current config'
+  arg_name 'No argument'
+  command :ping do |c|
+    c.action do
+      p "package name: #{Liquigen.package_name}"
+      p "controller_package_name: #{Liquigen.controller_package_name}"
+      p "entity_package_name: #{Liquigen.entity_package_name}"
+      p "repository_package_name: #{Liquigen.repository_package_name}"
+      p "java_codes_root: #{Liquigen.java_codes_root}"
+      p "migration_path: #{Liquigen.migration_path}"
+    end
+  end
+
   pre do |global, command, options, args|
     # Pre logic here
     # Return true to proceed; false to abort and not call the
     # chosen command
     # Use skips_pre before a command to skip this block
     # on that command only
+    Liquigen.load
+
     true
   end
 
