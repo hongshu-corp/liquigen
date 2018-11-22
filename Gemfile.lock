@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    liquigen (0.0.3)
+    liquigen (0.0.4)
       activesupport
       gli (= 2.18.0)
 

@@ -20,8 +20,16 @@ class App
   subcommand_option_handling :normal
   arguments :strict
 
+  desc 'Edit config file'
+  arg_name 'no argument'
+  command :config do |c|
+    c.action do
+      Liquigen::Scaffold::Config.new.process
+    end
+  end
+
   desc 'add table script'
-  arg_name 'Describe arguments to add_table here'
+  arg_name 'properties pair like id:integer'
   long_desc %{
     Example
     liquigen add_table -t user id:integer name:string
