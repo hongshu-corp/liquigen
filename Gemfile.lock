@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    liquigen (0.0.4)
+    liquigen (0.1.0)
       activesupport
       gli (= 2.18.0)
 
@@ -24,7 +24,7 @@ GEM
     builder (3.2.3)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.3)
     contracts (0.16.0)
     cucumber (3.1.2)
       builder (>= 2.1.2)
