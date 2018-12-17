@@ -83,6 +83,7 @@ module Liquigen::Handlers
       empty_marks = []
       lines.each_with_index do |line, index|
         parts = line.split(':')
+        next if index.zero?
         next if parts.size > 1
         next if line.include?('-')
         next if line.strip.size.zero?
