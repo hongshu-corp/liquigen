@@ -16,7 +16,7 @@ spec = Gem::Specification.new do |s|
   s.bindir = 'bin'
   s.executables << 'liquigen'
 
-  s.add_dependency 'activesupport', '~> 0'
+  s.add_dependency 'activesupport', '>= 4.1.11'
 
   s.add_development_dependency 'aruba', '~> 0'
   s.add_development_dependency 'rake', '~> 10.0'
