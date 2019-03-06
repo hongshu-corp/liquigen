@@ -16,7 +16,7 @@ module Liquigen
         decimal: 'decimal',
         datetime: 'datetime',
         binary: 'blob',
-        boolean: 'tinyint(1)'
+        boolean: 'boolean'
       }
 
       self.java_map = {
