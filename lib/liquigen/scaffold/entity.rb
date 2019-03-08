@@ -28,7 +28,7 @@ module Liquigen::Scaffold
 
     def methods_lines
       lines = []
-      skip_ones = %w[id created_time updated_time]
+      skip_ones = %w[id created_at updated_at]
       props.map do |property|
         key, value = property.split(':')
         next if skip_ones.include?(key.underscore)
