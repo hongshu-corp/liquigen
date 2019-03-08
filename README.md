@@ -188,6 +188,7 @@ liquigen scaffold -t table --controller --repository id:integer name:string emai
 spring:
   liquibase:
     change-log: classpath:/db/changelog-master.yaml
+    relativeToChangelogFile: true
 ```
 * Edit your changelog-master.yaml file.
 ```yaml
