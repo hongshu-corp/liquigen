@@ -19,6 +19,7 @@ module Liquigen::Scaffold
       contents << '# controller_package_name='
       contents << '# entity_package_name='
       contents << '# repository_package_name='
+      contents << '# repository_suffix=Repository'
       contents << ''
     end
   end

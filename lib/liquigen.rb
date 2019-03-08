@@ -50,6 +50,8 @@ module Liquigen
     # default value: src/main/resources/db/migrations
     attr_accessor :migration_path
 
+    attr_accessor :repository_suffix
+
     def load_default
       self.package_name ||= 'com.package'
       self.controller_package_name ||= "#{package_name}.controller"
@@ -57,6 +59,7 @@ module Liquigen
       self.repository_package_name ||= "#{package_name}.repository"
       self.java_codes_root ||= 'src/main/java'
       self.migration_path ||= 'src/main/resources/db/migrations'
+      self.repository_suffix ||= 'Repository'
     end
 
     def load

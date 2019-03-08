@@ -174,6 +174,7 @@ Please specify your custom name and path:
 * controller_package_name=
 * entity_package_name=
 * repository_package_name=
+* repository_suffix= # If you want UserRepository, set Repository here.
 
 ## scaffold
 ```bash

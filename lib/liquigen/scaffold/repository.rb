@@ -5,7 +5,7 @@ module Liquigen::Scaffold
     end
 
     def file_append
-      'Repo'
+      Liquigen.repository_suffix
     end
 
     def import_lines

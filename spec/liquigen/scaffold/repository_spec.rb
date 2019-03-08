@@ -7,6 +7,7 @@ RSpec.describe Liquigen::Scaffold::Repository, type: :model do
 
   before do
     Liquigen.java_codes_root = 'src/main/java'
+    Liquigen.repository_suffix = 'Repository'
     allow_any_instance_of(Liquigen::Scaffold::Entity).to receive(:current_package).and_return(package)
   end
 
