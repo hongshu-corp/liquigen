@@ -5,22 +5,21 @@ module Liquigen::Scaffold
     end
 
     def file_append
-      'Repository'
+      'Repo'
     end
 
     def import_lines
       [
         "package #{current_package};",
-        "import #{Liquigen.entity_package_name}.#{name.singularize.camelize};",
-        'import org.springframework.stereotype.Repository;',
+        'import com.dyg.lib.rest.repository.EntityRepository;',
+        "import com.dyg.main.entity.#{name.singularize.camelize};",
         ''
       ]
     end
 
     def class_lines
       [
-        '@Repository',
-        "public interface #{name.singularize.camelize}#{file_append} extends IRepository<#{name.singularize.camelize}, Long> {"
+        "public interface #{name.singularize.camelize}#{file_append} extends EntityRepository<#{name.singularize.camelize}, Long> {"
       ]
     end
 

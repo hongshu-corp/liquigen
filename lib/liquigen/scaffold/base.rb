@@ -19,6 +19,7 @@ module Liquigen::Scaffold
       lines += []
       lines += methods_lines
       lines += ['}']
+      lines += ['']
 
       File.open(file, 'w') do |f|
         f.write lines.join("\n")

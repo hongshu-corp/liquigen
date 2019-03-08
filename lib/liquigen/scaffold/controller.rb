@@ -16,8 +16,12 @@ module Liquigen::Scaffold
       [
         "package #{current_package};",
         '',
-        "import #{Liquigen.entity_package_name}.#{name.singularize.camelize};",
-        "import #{Liquigen.repository_package_name}.#{name.camelize}Repository;",
+        'import com.dyg.lib.rest.controller.Create;',
+        'import com.dyg.lib.rest.controller.Delete;',
+        'import com.dyg.lib.rest.controller.Read;',
+        'import com.dyg.lib.rest.controller.Update;',
+        "import #{Liquigen.repository_package_name}.#{name.singularize.camelize}Repo;",
+        'import lombok.Getter;',
         'import org.springframework.beans.factory.annotation.Autowired;',
         'import org.springframework.web.bind.annotation.RequestMapping;',
         'import org.springframework.web.bind.annotation.RestController;',
@@ -29,16 +33,23 @@ module Liquigen::Scaffold
       [
         '@RestController',
         "@RequestMapping(\"/#{name.underscore.pluralize}\")",
-        "public class #{name.pluralize.camelize}#{file_append} extends ControllerBase<#{name.singularize.camelize}, #{name.singularize.camelize}Repository> {"
+        "public class #{name.pluralize.camelize}#{file_append} implements Create, Read.Index, Read.Show, Update, Delete {"
       ]
     end
 
     def methods_lines
       [
+        'private final static Object[] PERMIT_PARAMS = {"name"};',
+        '',
         '@Autowired',
-        "public #{name.pluralize.camelize}#{file_append}(#{name.singularize.camelize}Repository repository) {",
-        'this.repository = repository;',
-        '}'
+        '@Getter',
+        "private #{name.singularize.camelize}Repo entityRepository;",
+        '',
+        '@Override',
+        'public Object[] createPermit() { return PERMIT_PARAMS; }',
+        '',
+        '@Override',
+        'public Object[] updatePermit() { return PERMIT_PARAMS; }'
       ]
     end
   end

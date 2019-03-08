@@ -9,25 +9,20 @@ module Liquigen::Scaffold
     def import_lines
       [
         "package #{current_package};",
-        'import com.fasterxml.jackson.annotation.*;',
-        'import com.fasterxml.jackson.databind.annotation.JsonDeserialize;',
-        'import lombok.Getter;',
-        'import lombok.Setter;',
+        'import lombok.Data;',
         'import lombok.experimental.Accessors;',
-        'import javax.persistence.*;',
-        'import java.util.List;',
+        '',
+        'import javax.persistence.Entity;',
         ''
       ]
     end
 
     def class_lines
       [
-        '@Entity',
-        '@Getter',
-        '@Setter',
+        "@Entity(name = \"#{name.underscore.pluralize}\")",
+        '@Data',
         '@Accessors(chain = true)',
-        "@Table(name = \"#{name.underscore.pluralize}\")",
-        "public class #{name.singularize.camelize} extends ModelBase {"
+        "public class #{name.singularize.camelize} extends FakeDeleteBaseEntity {"
       ]
     end
 
@@ -38,12 +33,8 @@ module Liquigen::Scaffold
         key, value = property.split(':')
         next if skip_ones.include?(key.underscore)
 
-        lines += [
-                    '@Column(nullable = false)',
-                    '@JsonProperty',
-                    "private #{Liquigen::TypeMap.new(value).java_type} #{key.camelize};",
-                    ''
-                  ]
+        lines += ["private #{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
+                  '']
       end
     end
   end
