@@ -41,6 +41,7 @@ module Liquigen::Scaffold
       props.each do |property|
         key, value = property.to_s.split(':')
         next if skip_ones.include?(key.underscore)
+        next if key.casecmp('available').zero?
 
         type = Liquigen::TypeMap.new(value).java_type
         stype = Liquigen::TypeMap.new(value).statement_type
