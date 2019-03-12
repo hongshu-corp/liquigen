@@ -35,8 +35,8 @@ module Liquigen::Scaffold
         '@PresentationField(primary = true, i18nKey = Constants.I18nCommon.Property.ID, type = FieldType.Number)',
         '@PresentationColumn(type = ColumnType.LinkShow, width = "50px")',
         '@PresentationDetailField',
-        'private Long id;'
-        '',
+        'private Long id;',
+        ''
       ]
       props.each do |property|
         key, value = property.to_s.split(':')
