@@ -27,7 +27,7 @@ module Liquigen
         text: 'String',
         float: 'Float',
         decimal: 'BigDecimal',
-        datetime: 'Date',
+        datetime: 'LocalDate',
         binary: 'Object',
         boolean: 'boolean'
       }
