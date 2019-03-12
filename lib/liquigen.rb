@@ -32,6 +32,7 @@ require 'liquigen/scaffold/base'
 require 'liquigen/scaffold/controller'
 require 'liquigen/scaffold/entity'
 require 'liquigen/scaffold/repository'
+require 'liquigen/scaffold/schema'
 
 # Add requires for other files you add to your project here, so
 # you just need to require this one file in your bin file
@@ -45,6 +46,8 @@ module Liquigen
     attr_accessor :entity_package_name
     # default value: #{package_name}.repository
     attr_accessor :repository_package_name
+    # default value: #{package_name}.statements
+    attr_accessor :schema_package_name
     # default value: src/main/java
     attr_accessor :java_codes_root
     # default value: src/main/resources/db/migrations
@@ -57,6 +60,7 @@ module Liquigen
       self.controller_package_name ||= "#{package_name}.controller"
       self.entity_package_name ||= "#{package_name}.model"
       self.repository_package_name ||= "#{package_name}.repository"
+      self.schema_package_name ||= "#{package_name}.statements"
       self.java_codes_root ||= 'src/main/java'
       self.migration_path ||= 'src/main/resources/db/migrations'
       self.repository_suffix ||= 'Repository'

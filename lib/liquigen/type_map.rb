@@ -3,6 +3,7 @@ module Liquigen
     attr_accessor :rails_type
     attr_accessor :map
     attr_accessor :java_map
+    attr_accessor :state_map
 
     def set_map
       # Only for mysql
@@ -30,6 +31,18 @@ module Liquigen
         binary: 'Object',
         boolean: 'boolean'
       }
+
+      self.state_map = {
+        integer: 'Number',
+        long: 'Number',
+        string: '',
+        text: '',
+        float: 'Number',
+        decimal: 'Number',
+        datetime: 'Datetime',
+        binary: '',
+        boolean: ''
+      }
     end
 
     def initialize(type)
@@ -43,6 +56,10 @@ module Liquigen
 
     def java_type
       java_map[rails_type.to_sym]
+    end
+
+    def statement_type
+      state_map[rails_type.to_sym]
     end
   end
 end

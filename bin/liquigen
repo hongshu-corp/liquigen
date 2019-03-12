@@ -167,17 +167,22 @@ class App
     c.switch :entity
 
     c.desc 'generating the controller'
-    c.default_value false
+    c.default_value true
     c.switch :controller
 
     c.desc 'generating the repository'
-    c.default_value false
+    c.default_value true
     c.switch :repository
+
+    c.desc 'generating the schema statement'
+    c.default_value true
+    c.switch :schema
 
     c.action do |_, options, args|
       Liquigen::Scaffold::Entity.new(options[:n], args).process if options[:entity]
       Liquigen::Scaffold::Controller.new(options[:n], args).process if options[:controller]
       Liquigen::Scaffold::Repository.new(options[:n], args).process if options[:repository]
+      Liquigen::Scaffold::Schema.new(options[:n], args).process if options[:schema]
     end
   end
 
