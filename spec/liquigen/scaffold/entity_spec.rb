@@ -19,4 +19,10 @@ RSpec.describe Liquigen::Scaffold::Entity, type: :model do
   describe '#filename' do
     specify { expect(entity.file_name).to eq 'User.java' }
   end
+
+  describe '#method_lines' do
+    let(:props) { ['name:string', 'nickname:string'] }
+    let(:result) { entity.methods_lines.reject { |x| x.length.zero? } }
+    specify { expect(result.size).to eq props.size }
+  end
 end

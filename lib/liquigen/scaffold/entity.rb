@@ -29,13 +29,14 @@ module Liquigen::Scaffold
     def methods_lines
       lines = []
       skip_ones = %w[id created_at updated_at]
-      props.map do |property|
-        key, value = property.split(':')
+      props.each do |property|
+        key, value = property.to_s.split(':')
         next if skip_ones.include?(key.underscore)
 
         lines += ["private #{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
                   '']
       end
+      lines
     end
   end
 end
