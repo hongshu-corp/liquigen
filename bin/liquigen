@@ -171,7 +171,7 @@ class App
     c.switch :controller
 
     c.desc 'generating the repository'
-    c.default_value true
+    c.default_value false
     c.switch :repository
 
     c.desc 'generating the schema statement'
@@ -183,6 +183,7 @@ class App
       Liquigen::Scaffold::Controller.new(options[:n], args).process if options[:controller]
       Liquigen::Scaffold::Repository.new(options[:n], args).process if options[:repository]
       Liquigen::Scaffold::Schema.new(options[:n], args).process if options[:schema]
+      Liquigen::Handlers::CreateTable.new(options[:n], args).process
     end
   end
 

@@ -23,6 +23,6 @@ RSpec.describe Liquigen::Scaffold::Entity, type: :model do
   describe '#method_lines' do
     let(:props) { ['name:string', 'nickname:string'] }
     let(:result) { entity.methods_lines.reject { |x| x.length.zero? } }
-    specify { expect(result.size).to eq props.size }
+    specify { expect(result.size).to eq props.size * 2 }
   end
 end

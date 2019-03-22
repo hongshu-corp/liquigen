@@ -16,13 +16,14 @@ module Liquigen::Scaffold
       [
         "package #{current_package};",
         '',
+        'import com.dyg.backend.controller.auth.HasPermissionOrRoot;',
+        "import com.dyg.backend.entity.#{name.camelize};",
         'import com.dyg.lib.rest.controller.RestCRUD;',
-        'import com.dyg.main.controller.auth.HasPermissionOrRoot;',
-        "import #{Liquigen.repository_package_name}.#{name.singularize.camelize}Repo;",
         'import lombok.Getter;',
-        'import org.springframework.beans.factory.annotation.Autowired;',
         'import org.springframework.web.bind.annotation.RequestMapping;',
         'import org.springframework.web.bind.annotation.RestController;',
+        '',
+        'import static com.dyg.lib.rest.controller.KeySpecCollection.permit;',
         ''
       ]
     end
@@ -32,16 +33,31 @@ module Liquigen::Scaffold
         '@RestController',
         "@RequestMapping(\"/#{name.underscore.pluralize}\")",
         '@HasPermissionOrRoot',
-        "public class #{name.pluralize.camelize}#{file_append} implements RestCRUD {"
+        "public class #{name.pluralize.camelize}#{file_append} implements RestCRUD<#{name.camelize}> {"
       ]
+    end
+
+    def permit_params
+      lines = []
+      skip_ones = %w[id created_at updated_at available]
+      props.each do |property|
+        key, value = property.to_s.split(':')
+        next if skip_ones.include?(key.underscore)
+
+        lines += ["\"#{key}\""]
+      end
+      lines
     end
 
     def methods_lines
       [
         '',
-        '@Autowired',
         '@Getter',
-        "private #{name.singularize.camelize}Repo entityRepository;",
+        "private final Object[] updatePermit = {#{permit_params.join(', ')}};",
+        '',
+
+        '@Getter',
+        'private final Object[] createPermit = permit(updatePermit);',
         ''
       ]
     end

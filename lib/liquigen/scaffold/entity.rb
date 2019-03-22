@@ -9,10 +9,14 @@ module Liquigen::Scaffold
     def import_lines
       [
         "package #{current_package};",
-        'import lombok.Data;',
+        'import lombok.Getter;',
+        'import lombok.Setter;',
         'import lombok.experimental.Accessors;',
         '',
         'import javax.persistence.Entity;',
+        'import javax.persistence.OneToOne;',
+        'import javax.persistence.OneToMany;',
+        'import javax.persistence.ManyToMany;',
         ''
       ]
     end
@@ -20,7 +24,8 @@ module Liquigen::Scaffold
     def class_lines
       [
         "@Entity(name = \"#{name.underscore.pluralize}\")",
-        '@Data',
+        '@Getter',
+        '@Setter',
         '@Accessors(chain = true)',
         "public class #{name.singularize.camelize} extends FakeDeleteBaseEntity {"
       ]
@@ -33,8 +38,11 @@ module Liquigen::Scaffold
         key, value = property.to_s.split(':')
         next if skip_ones.include?(key.underscore)
 
-        lines += ["private #{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
-                  '']
+        lines += [
+          '//@OneToOne',
+          "private #{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
+          ''
+        ]
       end
       lines
     end
