@@ -178,7 +178,7 @@ Please specify your custom name and path:
 
 ## scaffold
 ```bash
-liquigen scaffold -t table --controller --repository id:integer name:string email:string
+liquigen scaffold -n table id:integer name:string email:string
 # Get help by typing liquigen scaffold --help
 ```
 
