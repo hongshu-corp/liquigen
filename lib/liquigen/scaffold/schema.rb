@@ -10,7 +10,7 @@ module Liquigen::Scaffold
       [
         "package #{current_package};",
         '',
-        'import com.dyg.main.config.Constants;',
+        'import com.dyg.backend.config.Constants;',
         'import com.dyg.schemas.*;',
         'import lombok.Getter;',
         'import lombok.Setter;',

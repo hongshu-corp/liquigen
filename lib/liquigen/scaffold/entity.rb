@@ -9,6 +9,7 @@ module Liquigen::Scaffold
     def import_lines
       [
         "package #{current_package};",
+        'import com.dyg.entity.FakeDeleteBaseEntity;',
         'import lombok.Getter;',
         'import lombok.Setter;',
         'import lombok.experimental.Accessors;',

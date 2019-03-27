@@ -17,13 +17,13 @@ module Liquigen::Scaffold
         "package #{current_package};",
         '',
         'import com.dyg.backend.controller.auth.HasPermissionOrRoot;',
-        "import com.dyg.backend.entity.#{name.camelize};",
-        'import com.dyg.lib.rest.controller.RestCRUD;',
+        "import com.dyg.backend.entity.#{name.singularize.camelize};",
+        'import com.dyg.base.rest.controller.RestCRUD;',
         'import lombok.Getter;',
         'import org.springframework.web.bind.annotation.RequestMapping;',
         'import org.springframework.web.bind.annotation.RestController;',
         '',
-        'import static com.dyg.lib.rest.controller.KeySpecCollection.permit;',
+        'import static com.dyg.base.rest.controller.KeySpecCollection.permit;',
         ''
       ]
     end
@@ -33,7 +33,7 @@ module Liquigen::Scaffold
         '@RestController',
         "@RequestMapping(\"/#{name.underscore.pluralize}\")",
         '@HasPermissionOrRoot',
-        "public class #{name.pluralize.camelize}#{file_append} implements RestCRUD<#{name.camelize}> {"
+        "public class #{name.pluralize.camelize}#{file_append} implements RestCRUD<#{name.singularize.camelize}> {"
       ]
     end
 
