@@ -44,7 +44,7 @@ module Liquigen::Scaffold
         key, value = property.to_s.split(':')
         next if skip_ones.include?(key.underscore)
 
-        lines += ["\"#{key}\""]
+        lines += ["\"#{key.camelize}\""]
       end
       lines
     end
