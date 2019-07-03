@@ -158,8 +158,9 @@ liquigen add_index -t user name:string email:string
 
 ## sql
 ```bash
-liquigen sql "update users set column=true" "update customers set x = 1"
+liquigen sql update permission data
 ```
+This will generate one file called 'datexxxx_Sql_UpdatePermissionData.ymal'
 
 ## config
 Which is used for scaffolding java codes. In your application directory, one file called '.liquigen' will be added.
