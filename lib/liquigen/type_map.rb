@@ -16,6 +16,8 @@ module Liquigen
         float: 'float',
         decimal: 'decimal',
         datetime: 'datetime',
+        date: 'date',
+        time: 'time',
         binary: 'blob',
         boolean: 'boolean'
       }
@@ -28,6 +30,8 @@ module Liquigen
         float: 'Float',
         decimal: 'BigDecimal',
         datetime: 'Instant',
+        date: 'LocalDateTime',
+        time: 'LocalTime',
         binary: 'Object',
         boolean: 'boolean'
       }
