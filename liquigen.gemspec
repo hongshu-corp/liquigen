@@ -15,6 +15,7 @@ spec = Gem::Specification.new do |s|
   # s.rdoc_options << '--title' << 'liquigen' << '--main' << 'README.rdoc' << '-ri'
   s.bindir = 'bin'
   s.executables << 'liquigen'
+  s.license = 'MIT'
 
   s.add_dependency 'activesupport', '>= 4.1.11'
 
