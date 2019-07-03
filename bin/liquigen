@@ -118,6 +118,10 @@ class App
 
   desc 'Describe sql here'
   arg_name 'Describe arguments to raw sql here'
+  long_desc %{
+    Example:
+    liquigen sql update permission data
+  }
   command :sql do |c|
     c.action do |_, _, args|
       handler = Liquigen::Handlers::Sql.new args

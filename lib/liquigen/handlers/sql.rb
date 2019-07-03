@@ -13,14 +13,12 @@ module Liquigen::Handlers
     end
 
     def file_suffix
-      "With#{props.size}Clauses"
+      props.map(&:camelize).join
     end
 
     def build_one_changeset(set)
-      props.each do |sql|
-        change = Liquigen::Sql.new sql
-        set.changes << change
-      end
+      change = Liquigen::Sql.new '# write your sql here, and you can remove the quote outside.'
+      set.changes << change
     end
   end
 end

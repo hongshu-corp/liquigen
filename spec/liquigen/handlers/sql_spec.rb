@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Liquigen::Handlers::Sql, type: :model do
-  let(:props) { ['update users set x = 1', 'update customers set x = 2'] }
+  let(:props) { ['update',  'permission',  'data'] }
   let(:handler) { described_class.new props }
 
   describe '#action_name' do
@@ -9,7 +9,7 @@ RSpec.describe Liquigen::Handlers::Sql, type: :model do
   end
 
   describe '#file_suffix' do
-    specify { expect(handler.file_suffix).to eq 'With2Clauses' }
+    specify { expect(handler.file_suffix).to eq 'UpdatePermissionData' }
   end
 
   describe '#id' do
