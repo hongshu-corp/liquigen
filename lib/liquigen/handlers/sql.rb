@@ -9,11 +9,11 @@ module Liquigen::Handlers
     end
 
     def action_name
-      'Sql'
+      'sql'
     end
 
     def file_suffix
-      props.map(&:camelize).join
+      props.map(&:underscore).join('_')
     end
 
     def build_one_changeset(set)

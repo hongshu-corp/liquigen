@@ -5,11 +5,11 @@ RSpec.describe Liquigen::Handlers::Sql, type: :model do
   let(:handler) { described_class.new props }
 
   describe '#action_name' do
-    specify { expect(handler.action_name).to eq 'Sql' }
+    specify { expect(handler.action_name).to eq 'sql' }
   end
 
   describe '#file_suffix' do
-    specify { expect(handler.file_suffix).to eq 'UpdatePermissionData' }
+    specify { expect(handler.file_suffix).to eq 'update_permission_data' }
   end
 
   describe '#id' do
