@@ -153,9 +153,14 @@ class App
       p "package name: #{Liquigen.package_name}"
       p "controller_package_name: #{Liquigen.controller_package_name}"
       p "entity_package_name: #{Liquigen.entity_package_name}"
-      p "repository_package_name: #{Liquigen.repository_package_name}"
+      p "schema_package_name: #{Liquigen.schema_package_name}"
+      p "vo_package_name: #{Liquigen.vo_package_name}"
+      p "cucumber_schema_package_name: #{Liquigen.cucumber_schema_package_name}"
+      p "libs_root: #{Liquigen.libs_root}"
       p "java_codes_root: #{Liquigen.java_codes_root}"
       p "migration_path: #{Liquigen.migration_path}"
+      p "feature_path: #{Liquigen.feature_path}"
+      p "cucumber_schema_path: #{Liquigen.cucumber_schema_path}"
     end
   end
 
@@ -178,15 +183,30 @@ class App
     c.default_value false
     c.switch :repository
 
-    c.desc 'generating the schema statement'
+    c.desc 'generating the feature'
+    c.default_value true
+    c.switch :feature
+
+    c.desc 'generating the schema test'
     c.default_value true
     c.switch :schema
+
+    c.desc 'generating the permit'
+    c.default_value true
+    c.switch :permit
+
+    c.desc 'generating the vo'
+    c.default_value true
+    c.switch :vo
 
     c.action do |_, options, args|
       Liquigen::Scaffold::Entity.new(options[:n], args).process if options[:entity]
       Liquigen::Scaffold::Controller.new(options[:n], args).process if options[:controller]
       Liquigen::Scaffold::Repository.new(options[:n], args).process if options[:repository]
+      Liquigen::Scaffold::Feature.new(options[:n], args).process if options[:feature]
       Liquigen::Scaffold::Schema.new(options[:n], args).process if options[:schema]
+      Liquigen::Scaffold::Permit.new(options[:n], args).process if options[:permit]
+      Liquigen::Scaffold::Vo.new(options[:n], args).process if options[:vo]
       Liquigen::Handlers::CreateTable.new(options[:n], args).process
     end
   end

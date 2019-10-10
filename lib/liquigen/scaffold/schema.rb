@@ -1,77 +1,51 @@
-require 'liquigen/type_map'
-
 module Liquigen::Scaffold
   class Schema < Base
+    def directory
+      Liquigen.cucumber_schema_path
+    end
+
     def current_package
-      Liquigen.schema_package_name
+      Liquigen.cucumber_schema_package_name
     end
 
     def import_lines
       [
         "package #{current_package};",
         '',
-        'import com.dyg.backend.config.Constants;',
-        'import com.dyg.schemas.*;',
-        'import lombok.Getter;',
-        'import lombok.Setter;',
-        '',
-        'import java.util.Date;'
+        'import com.dyg.entity;',
+        'import com.github.leeonky.dal.format.Formatters;',
+        ''
       ]
     end
 
     def class_lines
       [
-        "@Getter",
-        '@Setter',
-        "@PresentationSchema(name = \"#{name.singularize}\")",
-        "public class #{name.singularize.camelize} {"
+        "public class #{name.singularize.camelize}#{file_append} {"
       ]
     end
 
     def methods_lines
-      lines = []
-      skip_ones = %w[id created_at updated_at]
-      lines += [
-        '@PresentationField(primary = true, i18nKey = Constants.I18nCommon.Property.ID, type = FieldType.Number)',
-        '@PresentationColumn(type = ColumnType.LinkShow, width = "50px")',
-        '@PresentationDetailField',
-        'private Long id;',
+      lines = [
+        'public static class Simple extends Schemas.IdAndTime {',
         ''
       ]
+      skip_ones = %w[id created_at updated_at available]
       props.each do |property|
         key, value = property.to_s.split(':')
         next if skip_ones.include?(key.underscore)
-        next if key.casecmp('available').zero?
-
-        type = Liquigen::TypeMap.new(value).java_type
-        stype = Liquigen::TypeMap.new(value).statement_type
-
-        if (stype && !stype.size.zero?)
-          lines += ["@PresentationField(type = FieldType.#{stype})"]
-        else
-          lines += ["@PresentationField//(i18nKey = Constants.I18nCommon.Property.#{key.upcase})"]
-        end
 
         lines += [
-          '@PresentationColumn',
-          '@PresentationFormField(rules = { @PresentationRule(required = true) })',
-          '@PresentationDetailField',
-          '//@PresentationSearchField',
-          "private #{type} #{key.camelize(:lower)};",
+          "#{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
+          "//Formatters.Number #{key.camelize(:lower)};",
+          "//Schemas.IdAndName #{key.camelize(:lower)};",
           ''
         ]
       end
-
       lines += [
-        '@PresentationField(type = FieldType.Datetime, i18nKey = Constants.I18nCommon.Property.CREATED_AT)',
-        '@PresentationColumn(width = "140px")',
-        '@PresentationDetailField',
-        'private Date createdAt;',
+        '}',
         '',
-        '@PresentationField(type = FieldType.Datetime, i18nKey = Constants.I18nCommon.Property.UPDATED_AT)',
-        '@PresentationColumn(width = "140px")',
-        '@PresentationDetailField',
-        'private Date updatedAt;'
+        'public static class Detail extends Simple {',
+        '}'
       ]
       lines
     end

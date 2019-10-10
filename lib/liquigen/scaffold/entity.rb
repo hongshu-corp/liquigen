@@ -6,6 +6,10 @@ module Liquigen::Scaffold
       Liquigen.entity_package_name
     end
 
+    def directory
+      "#{Liquigen.libs_root}/#{current_package.split('.').join('/')}"
+    end
+
     def import_lines
       [
         "package #{current_package};",
@@ -18,14 +22,14 @@ module Liquigen::Scaffold
         'import javax.persistence.OneToOne;',
         'import javax.persistence.OneToMany;',
         'import javax.persistence.ManyToMany;',
+        'import javax.persistence.ManyToOne;',
         ''
       ]
     end
 
     def class_lines
       [
-        '@Entity',
-        "@Table(name = \"#{name.underscore.pluralize}\")",
+        "@Entity(name = \"#{name.underscore.pluralize}\")",
         '@Getter',
         '@Setter',
         '@Accessors(chain = true)',

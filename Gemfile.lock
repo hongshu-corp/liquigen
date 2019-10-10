@@ -1,18 +1,19 @@
 PATH
   remote: .
   specs:
-    liquigen (0.1.7)
+    liquigen (0.1.8)
       activesupport (>= 4.1.11)
       gli (= 2.18.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.2.3)
+    activesupport (6.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+      zeitwerk (~> 2.1, >= 2.1.8)
     aruba (0.14.6)
       childprocess (>= 0.6.3, < 0.10.0)
       contracts (~> 0.9)
@@ -46,9 +47,9 @@ GEM
     ffi (1.9.25)
     gherkin (5.1.0)
     gli (2.18.0)
-    i18n (1.6.0)
+    i18n (1.7.0)
       concurrent-ruby (~> 1.0)
-    minitest (5.11.3)
+    minitest (5.12.2)
     multi_json (1.13.1)
     multi_test (0.1.2)
     rake (10.5.0)
@@ -69,6 +70,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    zeitwerk (2.2.0)
 
 PLATFORMS
   ruby

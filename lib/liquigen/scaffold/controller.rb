@@ -17,13 +17,10 @@ module Liquigen::Scaffold
         "package #{current_package};",
         '',
         'import com.dyg.backend.controller.auth.HasPermissionOrRoot;',
-        "import com.dyg.backend.entity.#{name.singularize.camelize};",
         'import com.dyg.base.rest.controller.RestCRUD;',
         'import lombok.Getter;',
         'import org.springframework.web.bind.annotation.RequestMapping;',
         'import org.springframework.web.bind.annotation.RestController;',
-        '',
-        'import static com.dyg.base.rest.controller.KeySpecCollection.permit;',
         ''
       ]
     end
@@ -47,19 +44,6 @@ module Liquigen::Scaffold
         lines += ["\"#{key.camelize(:lower)}\""]
       end
       lines
-    end
-
-    def methods_lines
-      [
-        '',
-        '@Getter',
-        "private final Object[] updatePermit = {#{permit_params.join(', ')}};",
-        '',
-
-        '@Getter',
-        'private final Object[] createPermit = permit(updatePermit);',
-        ''
-      ]
     end
   end
 end

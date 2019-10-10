@@ -16,6 +16,8 @@ module Liquigen::Scaffold
       contents << '# package_name=your-package-name, required'
       contents << '# java_codes_root=src/main/java'
       contents << '# migration_path=src/main/resources/db/migrations'
+      contents << '# feature_path='
+      contents << '# cucumber_schema_path='
       contents << '# controller_package_name='
       contents << '# entity_package_name='
       contents << '# repository_package_name='
