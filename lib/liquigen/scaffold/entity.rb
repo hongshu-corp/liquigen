@@ -29,7 +29,8 @@ module Liquigen::Scaffold
 
     def class_lines
       [
-        "@Entity(name = \"#{name.underscore.pluralize}\")",
+        '@Entity',
+        "@Table(name = \"#{name.underscore.pluralize}\")",
         '@Getter',
         '@Setter',
         '@Accessors(chain = true)',
