@@ -28,7 +28,7 @@ module Liquigen::Scaffold
     def class_lines
       [
         '@RestController',
-        "@RequestMapping(\"/#{name.underscore.pluralize}\")",
+        "@RequestMapping(\"#{name.underscore.pluralize}\")",
         '@HasPermissionOrRoot',
         "public class #{name.pluralize.camelize}#{file_append} implements RestCRUD<#{name.singularize.camelize}> {"
       ]

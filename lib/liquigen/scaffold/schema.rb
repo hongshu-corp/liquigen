@@ -35,7 +35,7 @@ module Liquigen::Scaffold
         next if skip_ones.include?(key.underscore)
 
         lines += [
-          "#{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
+          "public #{Liquigen::TypeMap.new(value).java_type} #{key.camelize(:lower)};",
           "//Formatters.Number #{key.camelize(:lower)};",
           "//Schemas.IdAndName #{key.camelize(:lower)};",
           ''
