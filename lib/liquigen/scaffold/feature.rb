@@ -5,7 +5,7 @@ module Liquigen::Scaffold
     end
 
     def file_name
-      "#{name.pluralize.camelize}.feature"
+      "#{name.singularize.camelize}.feature"
     end
 
     def import_lines

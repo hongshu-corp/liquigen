@@ -13,16 +13,12 @@ module Liquigen::Scaffold
     def import_lines
       [
         "package #{current_package};",
-        'import com.dyg.entity.FakeDeleteBaseEntity;',
+        'import com.dyg.entity;',
         'import lombok.Getter;',
         'import lombok.Setter;',
         'import lombok.experimental.Accessors;',
         '',
-        'import javax.persistence.Entity;',
-        'import javax.persistence.OneToOne;',
-        'import javax.persistence.OneToMany;',
-        'import javax.persistence.ManyToMany;',
-        'import javax.persistence.ManyToOne;',
+        'import javax.persistence.*;',
         ''
       ]
     end
